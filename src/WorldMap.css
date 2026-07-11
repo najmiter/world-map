@@ -1,0 +1,239 @@
+.map-root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #c6ddf0;
+  --paper: #ffffff;
+  --ink: #1e293b;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  color: var(--ink);
+}
+
+.map-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.map-canvas-top {
+  touch-action: none;
+}
+
+/* ---------- chrome ---------- */
+
+.theme-picker {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
+  box-shadow: 0 4px 20px color-mix(in srgb, var(--ink) 10%, transparent);
+}
+
+.theme-picker button {
+  appearance: none;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 11px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: color-mix(in srgb, var(--ink) 75%, transparent);
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.theme-picker button:hover {
+  background: color-mix(in srgb, var(--ink) 7%, transparent);
+}
+
+.theme-picker button.active {
+  background: color-mix(in srgb, var(--ink) 11%, transparent);
+  color: var(--ink);
+}
+
+.theme-picker .swatches {
+  display: flex;
+  gap: 3px;
+}
+
+.theme-picker .swatches i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+@media (max-width: 760px) {
+  .theme-picker {
+    top: auto;
+    bottom: 20px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+
+  .theme-picker button {
+    padding: 8px 10px;
+    font-size: 0;
+    gap: 3px;
+  }
+}
+
+.zoom-controls {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  gap: 2px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
+  box-shadow: 0 4px 20px color-mix(in srgb, var(--ink) 10%, transparent);
+}
+
+.zoom-controls button {
+  appearance: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: color-mix(in srgb, var(--ink) 80%, transparent);
+  font-size: 17px;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease;
+}
+
+.zoom-controls button:hover {
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+}
+
+.zoom-controls button:active {
+  transform: scale(0.92);
+}
+
+.map-hint {
+  position: absolute;
+  left: 22px;
+  bottom: 22px;
+  font-size: 12px;
+  font-weight: 450;
+  color: color-mix(in srgb, var(--ink) 55%, transparent);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ---------- tooltip ---------- */
+
+.tooltip {
+  position: fixed;
+  z-index: 10;
+  min-width: 150px;
+  max-width: 230px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--paper) 94%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
+  box-shadow: 0 8px 28px color-mix(in srgb, var(--ink) 16%, transparent);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+.tooltip.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tooltip-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.tooltip-flag {
+  font-size: 17px;
+}
+
+.tooltip-meta {
+  margin-top: 3px;
+  font-size: 12px;
+  font-weight: 450;
+  color: color-mix(in srgb, var(--ink) 62%, transparent);
+}
+
+/* ---------- loading ---------- */
+
+.map-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: color-mix(in srgb, var(--paper) 80%, transparent);
+}
+
+.map-loading p {
+  font-size: 13px;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--ink) 70%, transparent);
+}
+
+.spinner {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2.5px solid color-mix(in srgb, var(--ink) 15%, transparent);
+  border-top-color: var(--ink);
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 640px) {
+
+  .map-title p,
+  .map-hint {
+    display: none;
+  }
+}
