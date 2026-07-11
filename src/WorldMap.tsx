@@ -5,13 +5,9 @@ import type { HoverInfo } from './types';
 import './WorldMap.css';
 import type { MapTheme } from './types';
 import { THEMES } from './map/themes';
+import { flagEmoji } from './map/utils';
 
 const compact = new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 });
-
-function flagEmoji(iso: string): string {
-  if (!/^[A-Za-z]{2}$/.test(iso)) return '🌐';
-  return String.fromCodePoint(...[...iso.toUpperCase()].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65));
-}
 
 export default function WorldMap() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -94,7 +90,15 @@ export default function WorldMap() {
         </button>
       </div>
 
-      <p className="map-hint">Drag to pan · Scroll to zoom · Click a country to focus · Click the ocean to reset</p>
+      <p className="map-hint">
+        Drag to pan · Scroll to zoom · Click a country to focus · Click the ocean to reset <br />
+        <span>
+          By{' '}
+          <a href="https://github.com/najmiter" target="_blank" rel="noopener noreferrer">
+            @najmiter
+          </a>
+        </span>
+      </p>
 
       <div className={`tooltip ${hover ? 'visible' : ''}`} style={tooltipStyle}>
         {hover && (
