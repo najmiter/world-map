@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Host: https://world-map.knoctal.com
+Sitemap: https://world-map.knoctal.com/sitemap.xml
